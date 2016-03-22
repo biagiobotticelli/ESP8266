@@ -1,0 +1,44 @@
+AT : 		See the status of the chip;
+AT+GMR : 	Get the version of the Firmware;
+
+ESP8266 WIFI module has 3 modes of operation.
+ST – Station mode in which ESP acts as a device & connects to an existing Access point.
+AP – Access Point mode where the ESP itself acts as AP & other devices like Mobile can connect to it.
+Both – ST & AP both mode is allowed in ESP.
+The mode of operation is set by the AT command
+AT+CWMODE = 1 for ST mode , 2 for AP mode & 3 for both.
+
+AT+CWMODE=1 : 	ESP8266 operating as Station;
+AT+CWLAP : 	Get the List of available Access Points;
+
+AT+CWJAP="Uzumaki88","12345678" : connects to Uzumaki88;
+AT+CIPMUX=1 : 	This initiates the server for a Webserver
+AT+CIPSERVER=1,80 : Start the server at HTTP port 80
+AT+CIFSR : Get the STATION IP address
+
+	If the CWMODE is set to 3 , you’ll get 2 IP address,
+	one for AP & another for Station mode.
+	We need the station IP address for Client mode operation.
+
+Open your web browser & type in the address of ESP8266.
+The browser sends a HTTP GET request which is displayed on the coolTerm window where
+ESP module is connected.
+The host IP address & the user agent (your web browser name) are displayed.
+After you get OK,
+
+AT+CIPSEND=0,30 : Send 30 characters through channel 0.
+
+Use the channel number which is displayed as CONNECT while a request is received
+from the browser.
+Now you get a  >  symbol , after which you’ve to type in 30 characters.
+<h1>HELLO IoT!!</h1>
+The module will wait till you type in 30 characters & finally displays SEND OK.
+You’ve to type characters within the Timeout limit.Otherwise the link will be closed.
+The characters are sent to the Web browser, but the browser is still waiting for the
+channel to be closed.
+
+AT+CIPCLOSE=0 : Close the channel number (0) where the connection was established.
+AT+CWQAP
+
+AT+CIPSERVER=0 : Close the server (followed by a AT+RST : Reset)
+
